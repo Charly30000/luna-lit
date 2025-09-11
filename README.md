@@ -1,2 +1,2 @@
 # Luna
-Gestor de estados para Lit (Lit Element) basado en Zustand
+State manager for Lit (Lit Element) based on Zustand

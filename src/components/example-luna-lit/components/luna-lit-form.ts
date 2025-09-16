@@ -15,16 +15,22 @@ export class ExampleLunaLitForm extends LitElement {
     return html`<div>
       <h2>Formulario con Luna Lit</h2>
       <form>
-        <label>Nombre:</label>
+        <label>Nombre <br/>(15 caracteres):</label>
         <input
           type="text"
           .value=${this.personaController.value.nombre}
-          maxlength="20"
           @input=${(e: Event) =>
             this.personaController.value.setNombre(
               (e.target as HTMLInputElement).value
             )}
         />
+
+        ${this.personaController.value.errorNombre
+          ? html`<br /><span style="color: red;"
+                >${this.personaController.value.errorNombre}</span
+              >`
+          : null}
+
         <br />
         <br />
         <label>Genero:</label>
@@ -35,8 +41,15 @@ export class ExampleLunaLitForm extends LitElement {
               (e.target as HTMLSelectElement).value as Genero
             )}
         >
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
+          ${Object.values(Genero).map(
+            (gen) =>
+              html`<option
+                value=${gen}
+                ?selected=${this.personaController.value.genero === gen}
+              >
+                ${gen}
+              </option>`
+          )}
         </select>
         <br />
         <br />

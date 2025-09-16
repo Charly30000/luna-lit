@@ -1,6 +1,9 @@
 import { createStore } from "../lib/luna/luna-core";
 
-export type Genero = "Masculino" | "Femenino";
+export enum Genero {
+  Masculino = "Masculino",
+  Femenino = "Femenino",
+}
 
 export type Contacto = {
   dni: string;
@@ -9,6 +12,7 @@ export type Contacto = {
 
 export type State = {
   nombre: string;
+  errorNombre: string;
   genero: Genero;
   edad: number;
   mascotas: string[];
@@ -16,16 +20,20 @@ export type State = {
 };
 
 export type Actions = {
+  // Setters
   setNombre: (nombre: string) => void;
   setGenero: (genero: Genero) => void;
   setEdad: (edad: number) => void;
   setMascotas: (mascotas: string[]) => void;
   setContacto: (contacto: Contacto) => void;
+  // Getters
+  getNombre: () => string;
 };
 
 const initialState: State = {
   nombre: "",
-  genero: "Masculino",
+  errorNombre: "",
+  genero: Genero.Masculino,
   edad: 0,
   mascotas: ["", ""],
   contacto: {
@@ -37,11 +45,16 @@ const initialState: State = {
 export const lunaLitFormStore = createStore<State & Actions>((set, get) => ({
   ...initialState,
   setNombre(nombre) {
-    if (nombre.length > 20) {
-      nombre = get().nombre;
+    if (nombre.length > 15) {
+      set({
+        errorNombre:
+          "El nombre debe de tener como máximo 15 caracteres. Se guardará con el valor: " +
+          get().nombre,
+      });
       return;
     }
     set({ nombre });
+    set({ errorNombre: "" });
   },
   setGenero(genero: Genero) {
     set({ genero });
@@ -54,5 +67,8 @@ export const lunaLitFormStore = createStore<State & Actions>((set, get) => ({
   },
   setContacto(contacto: Contacto) {
     set({ contacto });
+  },
+  getNombre() {
+    return get().nombre;
   },
 }));

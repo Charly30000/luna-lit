@@ -1,7 +1,12 @@
 import { createStore } from "../lib/luna/luna-core";
 import { withPersistence } from "../lib/luna/persist-middleware";
 
-type Color = "Rojo" | "Azul" | "Plateado" | "Dorado";
+export enum Color {
+  Rojo = "Rojo",
+  Azul = "Azul",
+  Plateado = "Plateado",
+  Dorado = "Dorado",
+}
 
 export type State = {
   color: Color;
@@ -24,7 +29,7 @@ export type Actions = {
 };
 
 const initialState: State = {
-  color: "Rojo",
+  color: Color.Rojo,
   rpm: 0,
   marca: "",
   caracteristicas: {

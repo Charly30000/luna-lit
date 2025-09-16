@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, TemplateResult, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import "./components/example-luna-lit/example-luna-lit";
 import "./components/example-luna-lit-persistance/example-luna-lit-persistance";
@@ -6,7 +6,7 @@ import "./components/example-luna-lit-migrate/example-luna-lit-migrate";
 import "./components/example-luna-migrate-js/example-luna-js-migrate";
 
 import { LunaController } from "./lib/luna/luna-controller";
-import { lunaStepListStore } from "./store/stepListStore";
+import { Formulario, lunaStepListStore } from "./store/stepListStore";
 
 @customElement("my-element")
 export class MyElement extends LitElement {
@@ -17,7 +17,7 @@ export class MyElement extends LitElement {
   );
 
   private get currentForm() {
-    const forms = {
+    const forms: { [key in Formulario]: TemplateResult } = {
       lunaLit: html`<example-lunalit></example-lunalit>`,
       lunaLitPersistance: html`<example-lunalit-persistance></example-lunalit-persistance>`,
       lunaLitMigrate: html`<example-lunalit-migrate></example-lunalit-migrate>`,

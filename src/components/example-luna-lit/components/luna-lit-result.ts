@@ -14,7 +14,7 @@ export class ExampleLunaLitResult extends LitElement {
   render() {
     return html`<div>
       <h2>Resultado del formulario</h2>
-      <p>Nombre: ${this.personaController.value.nombre}</p>
+      <p>Nombre: ${this.personaController.value.getNombre()}</p>
       <p>Genero: ${this.personaController.value.genero}</p>
       <p>Edad: ${this.personaController.value.edad}</p>
       <p>Mascota 1: ${this.personaController.value.mascotas[0]}</p>

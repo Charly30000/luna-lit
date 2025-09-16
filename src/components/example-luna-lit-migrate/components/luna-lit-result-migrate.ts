@@ -11,12 +11,21 @@ export class ExampleLunaLitResultMigrate extends LitElement {
     (state) => state
   );
 
+  // Ejemplo de acceder a un campo específico del estado
+  private marcaController = new LunaController(
+    this,
+    lunaLitFormPersistanceMigrateStore,
+    (state) => state.marca
+  );
+
   render() {
     return html`<div>
       <h2>Resultado del formulario</h2>
       <p>Nombre telefono: ${this.telefonoController.value.nombre}</p>
-      <p>Marca: ${this.telefonoController.value.marca}</p>
-      <p>Centímetros: ${this.telefonoController.value.caracteristicas.centimetros}</p>
+      <!-- Acceso a dato en especifico del estado -->
+      <p>Marca: ${this.marcaController.value}</p>
+      <!-- Acceso a dato en especifico del estado sin usar controlador (NO RECOMENDADO) -->
+      <p>Centímetros: ${lunaLitFormPersistanceMigrateStore.getState().caracteristicas.centimetros}</p>
       <p>Pixeles Cámara: ${this.telefonoController.value.caracteristicas.pixelesCamara}</p>
       <p>Dual SIM: ${this.telefonoController.value.caracteristicas.dualSIM}</p>
       <p>Accesorio 1: ${this.telefonoController.value.accesorios[0]}</p>

@@ -1,7 +1,10 @@
 import { LitElement, css, html } from "lit";
 import { customElement } from "lit/decorators.js";
 import { LunaController } from "../../../lib/luna/luna-controller";
-import { lunaLitFormPersistanceStore } from "../../../store/lunaLitFormPersistanceStore";
+import {
+  Color,
+  lunaLitFormPersistanceStore,
+} from "../../../store/lunaLitFormPersistanceStore";
 
 @customElement("example-lunalit-form-persistance")
 export class ExampleLunaLitFormPersistance extends LitElement {
@@ -23,10 +26,15 @@ export class ExampleLunaLitFormPersistance extends LitElement {
               (e.target as HTMLSelectElement).value as any
             )}
         >
-          <option value="Rojo">Rojo</option>
-          <option value="Azul">Azul</option>
-          <option value="Plateado">Plateado</option>
-          <option value="Dorado">Dorado</option>
+          ${Object.values(Color).map(
+            (col) =>
+              html`<option
+                value=${col}
+                ?selected=${this.cocheController.value.color === col}
+              >
+                ${col}
+              </option>`
+          )}
         </select>
         <br /><br />
 
